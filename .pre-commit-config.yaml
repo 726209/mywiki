@@ -1,5 +1,36 @@
+# =============================================
+# Git Pre-commit 钩子配置文件
+# 本文件定义了代码提交 (git commit) 前自动触发的质量检查流程，确保不合规代码不会进入版本库。
+# 启用方式：执行 `pre-commit install` 将其挂载至 .git/hooks/pre-commit
+# =============================================
+
+# 默认阶段：在 commit 时运行
+default_stages: [pre-commit]
+
+# 忽略对某些大型/第三方文件的检查 (如构建产物、Lock文件)
+exclude: '^(build/|dist/)'
+
 repos:
+  # =============================================
+  # Gitleaks 安全扫描（防止凭证泄露）
+  # =============================================
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1
     hooks:
       - id: gitleaks
+
+  # =============================================
+  # 1. 基础文件与安全性检查 (由 pre-commit 官方维护)
+  # =============================================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml                  # 校验 YAML 配置文件语法正确性
+      - id: check-toml                  # 校验 TOML 配置文件语法正确性
+      - id: check-json                  # 校验 JSON 配置文件语法正确性
+      - id: check-added-large-files     # 阻止提交超过 500KB 的大文件
+        args: ['--maxkb=512']
+      - id: end-of-file-fixer           # 确保文件末尾有且仅有一个空行
+      - id: trailing-whitespace         # 自动清除行尾无用的空格/制表符
+      - id: check-merge-conflict        # 检查是否遗留 Git 冲突标记 (如 <<<<<<<)
+      - id: detect-private-key          # 严格防止将私钥/密钥误提交至代码库
