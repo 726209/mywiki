@@ -1,0 +1,30 @@
+# VitePress 默认构建与缓存目录
+docs/.vitepress/dist
+docs/.vitepress/cache
+.vite_opt_cache
+
+# Node 依赖与包管理器缓存
+node_modules
+pnpm-global
+
+# 日志与临时文件
+*.log
+*.tgz
+.temp
+temp
+examples-temp
+*.timestamp-*.mjs
+
+# 系统及编辑器生成的冗余文件
+.DS_Store
+.idea
+.vscode
+.claude
+
+# 敏感信息或待办清单（根据个人需要）
+TODOs.md
+
+# 自定义测试夹具构建产物
+__tests__/base/fixture/.vitepress/dist-*
+dist
+cache
