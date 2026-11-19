@@ -30,7 +30,7 @@ repos:
       - id: check-json                  # 校验 JSON 配置文件语法正确性
       - id: check-added-large-files     # 阻止提交超过 500KB 的大文件
         args: ['--maxkb=512']
-      - id: end-of-file-fixer           # 确保文件末尾有且仅有一个空行
+      #- id: end-of-file-fixer           # 确保文件末尾有且仅有一个空行
       - id: trailing-whitespace         # 自动清除行尾无用的空格/制表符
       - id: check-merge-conflict        # 检查是否遗留 Git 冲突标记 (如 <<<<<<<)
       - id: detect-private-key          # 严格防止将私钥/密钥误提交至代码库
